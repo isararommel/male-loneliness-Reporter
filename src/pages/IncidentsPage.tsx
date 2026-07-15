@@ -169,6 +169,12 @@ export function IncidentsPage({ onNeedsProfile }: { onNeedsProfile: () => void }
               )}
               {incident.senderProfileUrl && <p className="muted">{incident.senderProfileUrl}</p>}
               {incident.notes && <p>{incident.notes}</p>}
+              {incident.screenshotBlocked && (
+                <p className="muted">
+                  Screenshot war technisch nicht möglich.
+                  {incident.manualDocumentation ? ` Manuelle Dokumentation: ${incident.manualDocumentation}` : ""}
+                </p>
+              )}
 
               {shots.length > 0 && (
                 <div className="thumb-row">

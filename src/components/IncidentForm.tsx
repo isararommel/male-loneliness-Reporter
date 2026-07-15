@@ -25,6 +25,8 @@ export function IncidentForm({ existing, onSaved, onCancel }: IncidentFormProps)
   const [senderHandle, setSenderHandle] = useState(existing?.senderHandle ?? "");
   const [senderProfileUrl, setSenderProfileUrl] = useState(existing?.senderProfileUrl ?? "");
   const [notes, setNotes] = useState(existing?.notes ?? "");
+  const [screenshotBlocked, setScreenshotBlocked] = useState(existing?.screenshotBlocked ?? false);
+  const [manualDocumentation, setManualDocumentation] = useState(existing?.manualDocumentation ?? "");
   const [existingShots, setExistingShots] = useState<Screenshot[]>([]);
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const [saving, setSaving] = useState(false);
@@ -54,7 +56,18 @@ export function IncidentForm({ existing, onSaved, onCancel }: IncidentFormProps)
     setSaving(true);
     try {
       const incident: Incident = existing
-        ? { ...existing, receivedDate, channel, channelDetail, senderName, senderHandle, senderProfileUrl, notes }
+        ? {
+            ...existing,
+            receivedDate,
+            channel,
+            channelDetail,
+            senderName,
+            senderHandle,
+            senderProfileUrl,
+            notes,
+            screenshotBlocked,
+            manualDocumentation,
+          }
         : {
             id: newId(),
             createdAt: new Date().toISOString(),
@@ -65,6 +78,8 @@ export function IncidentForm({ existing, onSaved, onCancel }: IncidentFormProps)
             senderHandle,
             senderProfileUrl,
             notes,
+            screenshotBlocked,
+            manualDocumentation,
             status: "erfasst",
           };
       await saveIncident(incident);
@@ -143,6 +158,27 @@ export function IncidentForm({ existing, onSaved, onCancel }: IncidentFormProps)
         Screenshots
         <input type="file" accept="image/*" multiple onChange={(e) => handleFiles(e.target.files)} />
       </label>
+
+      <label className="checkbox-label">
+        <input
+          type="checkbox"
+          checked={screenshotBlocked}
+          onChange={(e) => setScreenshotBlocked(e.target.checked)}
+        />
+        Screenshot war technisch nicht möglich (z. B. wegen Screenshot-Sperre der App)
+      </label>
+
+      {screenshotBlocked && (
+        <label>
+          Manuelle Dokumentation (Beschreibung, da kein Screenshot möglich)
+          <textarea
+            rows={3}
+            placeholder="z. B. angezeigter Username, Profildetails, Wortlaut der Nachricht, Zeitpunkt"
+            value={manualDocumentation}
+            onChange={(e) => setManualDocumentation(e.target.value)}
+          />
+        </label>
+      )}
 
       {(existingShots.length > 0 || newFiles.length > 0) && (
         <div className="thumb-row">

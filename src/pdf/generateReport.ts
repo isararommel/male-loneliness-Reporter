@@ -120,6 +120,13 @@ export async function generateAnzeigePdf({ profile, incidents, screenshotsByInci
       writeParagraph(`Weitere Angaben: ${incident.notes}`);
     }
     const shots = screenshotsByIncident.get(incident.id) ?? [];
+    if (incident.screenshotBlocked) {
+      writeParagraph(
+        "Hinweis: Ein Screenshot war technisch nicht möglich, da die genutzte Plattform Screenshots verhindert " +
+          "bzw. Bildinhalte danach entfernt. Es liegt daher folgende manuelle Dokumentation vor:"
+      );
+      writeParagraph(incident.manualDocumentation || "(keine manuelle Dokumentation angegeben)");
+    }
     writeParagraph(
       `Beweismittel: ${shots.length > 0 ? `${shots.length} Screenshot(s), siehe Anlage` : "kein Screenshot hinterlegt"}`
     );

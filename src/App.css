@@ -100,6 +100,18 @@ main {
   flex: 1;
 }
 
+.form label.checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.form label.checkbox-label input {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;

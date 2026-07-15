@@ -1,4 +1,6 @@
 export type DeliveryChannel =
+  | "Grindr"
+  | "Romeo.com"
   | "WhatsApp"
   | "Instagram"
   | "Facebook"
@@ -12,6 +14,8 @@ export type DeliveryChannel =
   | "Sonstiger Messenger / Social Media";
 
 export const DELIVERY_CHANNELS: DeliveryChannel[] = [
+  "Grindr",
+  "Romeo.com",
   "WhatsApp",
   "Instagram",
   "Facebook",
@@ -45,6 +49,8 @@ export interface Incident {
   senderHandle?: string;
   senderProfileUrl?: string;
   notes?: string;
+  screenshotBlocked?: boolean;
+  manualDocumentation?: string;
   status: IncidentStatus;
   reportedAt?: string;
 }
