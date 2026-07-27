@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getProfile, saveProfile } from "../db";
-import type { Profile } from "../types";
+import { BUNDESLAENDER, type Profile } from "../types";
 
 const EMPTY: Profile = {
   id: "self",
@@ -84,6 +84,22 @@ export function ProfileForm() {
           <input required value={profile.city} onChange={(e) => update("city", e.target.value)} />
         </label>
       </div>
+
+      <label>
+        Bundesland (Wohnsitz)
+        <select value={profile.bundesland ?? ""} onChange={(e) => update("bundesland", e.target.value as Profile["bundesland"])}>
+          <option value="">Bitte wählen</option>
+          {BUNDESLAENDER.map((b) => (
+            <option key={b} value={b}>
+              {b}
+            </option>
+          ))}
+        </select>
+      </label>
+      <p className="muted">
+        Wird genutzt, um dir die passende Online-Wache bzw. den richtigen Einreichungsweg für deine Anzeige zu
+        zeigen.
+      </p>
 
       <div className="grid-2">
         <label>

@@ -17,7 +17,12 @@ function formatDate(iso: string) {
   return d.toLocaleDateString("de-DE");
 }
 
-export function IncidentsPage({ onNeedsProfile }: { onNeedsProfile: () => void }) {
+interface IncidentsPageProps {
+  onNeedsProfile: () => void;
+  onReportGenerated: () => void;
+}
+
+export function IncidentsPage({ onNeedsProfile, onReportGenerated }: IncidentsPageProps) {
   const [incidents, setIncidents] = useState<Incident[]>([]);
   const [shotsByIncident, setShotsByIncident] = useState<Record<string, Screenshot[]>>({});
   const [showForm, setShowForm] = useState(false);
@@ -91,6 +96,7 @@ export function IncidentsPage({ onNeedsProfile }: { onNeedsProfile: () => void }
       }
       setSelected(new Set());
       await refresh();
+      onReportGenerated();
     } finally {
       setGenerating(false);
     }

@@ -29,6 +29,43 @@ export const DELIVERY_CHANNELS: DeliveryChannel[] = [
   "Sonstiger Messenger / Social Media",
 ];
 
+export type Bundesland =
+  | "Baden-Württemberg"
+  | "Bayern"
+  | "Berlin"
+  | "Brandenburg"
+  | "Bremen"
+  | "Hamburg"
+  | "Hessen"
+  | "Mecklenburg-Vorpommern"
+  | "Niedersachsen"
+  | "Nordrhein-Westfalen"
+  | "Rheinland-Pfalz"
+  | "Saarland"
+  | "Sachsen"
+  | "Sachsen-Anhalt"
+  | "Schleswig-Holstein"
+  | "Thüringen";
+
+export const BUNDESLAENDER: Bundesland[] = [
+  "Baden-Württemberg",
+  "Bayern",
+  "Berlin",
+  "Brandenburg",
+  "Bremen",
+  "Hamburg",
+  "Hessen",
+  "Mecklenburg-Vorpommern",
+  "Niedersachsen",
+  "Nordrhein-Westfalen",
+  "Rheinland-Pfalz",
+  "Saarland",
+  "Sachsen",
+  "Sachsen-Anhalt",
+  "Schleswig-Holstein",
+  "Thüringen",
+];
+
 export type IncidentStatus = "erfasst" | "angezeigt";
 
 export interface Screenshot {
@@ -66,6 +103,7 @@ export interface Profile {
   city: string;
   phone?: string;
   email?: string;
+  bundesland?: Bundesland;
 }
 
 export function isProfileComplete(profile: Profile | undefined): profile is Profile {

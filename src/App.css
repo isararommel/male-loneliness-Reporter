@@ -65,6 +65,38 @@ main {
   margin: 0;
 }
 
+.footer-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.footer-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.footer-link:hover {
+  opacity: 1;
+}
+
+.operator-warning {
+  margin-bottom: 4px;
+}
+
+.operator-warning code {
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
