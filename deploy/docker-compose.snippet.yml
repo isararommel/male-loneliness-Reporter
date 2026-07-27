@@ -1,0 +1,30 @@
+# Merge this service into your existing docker-compose stack.
+#
+# Assumes your edge nginx also runs in Docker and reaches other app
+# containers over a shared external network (adjust PROXY_NETWORK_NAME
+# below to whatever that network is actually called, e.g. "proxy",
+# "web", "edge" ...). No ports are published on the host — nginx reaches
+# the container directly via the Docker network, which matches a
+# hardened setup better than exposing a host port.
+#
+# If your edge nginx instead runs directly on the host (not in Docker),
+# replace the "networks" block below with:
+#   ports:
+#     - "127.0.0.1:8091:80"
+# and proxy_pass to http://127.0.0.1:8091 in the vhost instead of the
+# container name.
+
+services:
+  dickpic-anzeige:
+    build:
+      context: /path/to/male-loneliness-Reporter
+      dockerfile: Dockerfile
+    image: dickpic-anzeige:latest
+    container_name: dickpic-anzeige
+    restart: unless-stopped
+    networks:
+      - PROXY_NETWORK_NAME
+
+networks:
+  PROXY_NETWORK_NAME:
+    external: true
